@@ -1,0 +1,322 @@
+<html lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-card":"#292A2D","inverse-on-surface":"#303032","on-background":"#e3e2e4","surface-container-high":"#292a2c","secondary-fixed-dim":"#c7c6c6","primary-fixed":"#e2e2e2","secondary-container":"#484949","secondary":"#c7c6c6","border-subtle":"rgba(255,255,255,0.08)","primary-container":"#e2e2e2","primary":"#ffffff","on-tertiary-fixed-variant":"#4b4544","accent-blue":"#1A73E8","on-error-container":"#ffdad6","on-primary":"#2f3131","tertiary":"#ffffff","background":"#121315","surface-address":"#26272A","on-tertiary-fixed":"#1f1b19","on-secondary-container":"#b8b8b8","on-secondary":"#2f3131","surface-container-lowest":"#0d0e10","surface":"#121315","surface-tint":"#c6c6c6","on-primary-fixed-variant":"#454747","on-error":"#690005","tertiary-container":"#eae0dd","on-secondary-fixed-variant":"#464747","outline":"#8e9192","surface-toolbar":"#202124","outline-variant":"#444748","inverse-surface":"#e3e2e4","on-primary-fixed":"#1a1c1c","on-primary-container":"#636465","tertiary-fixed-dim":"#cec5c2","on-tertiary-container":"#6a6361","on-surface":"#e3e2e4","surface-container-low":"#1b1c1e","surface-container-highest":"#343537","inverse-primary":"#5d5f5f","error-container":"#93000a","on-tertiary":"#342f2e","surface-dim":"#121315","secondary-fixed":"#e3e2e2","on-secondary-fixed":"#1a1c1c","surface-container":"#1f2022","primary-fixed-dim":"#c6c6c6","error":"#ffb4ab","surface-bright":"#38393b","on-surface-variant":"#c4c7c8","tertiary-fixed":"#eae0dd","surface-variant":"#343537"},"borderRadius":{"DEFAULT":"0.25rem","lg":"0.5rem","xl":"0.75rem","full":"9999px"},"spacing":{"address-bar-width":"640px","gutter":"24px","container-margin":"48px","toolbar-height":"48px","unit":"4px"},"fontFamily":{"headline-md":["Inter"],"body-md":["Inter"],"label-caps":["Inter"],"body-lg":["Inter"],"headline-lg":["Inter"],"label-ui":["Inter"],"clock-display":["Inter"]},"fontSize":{"headline-md":["24px",{"lineHeight":"32px","fontWeight":"500"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"label-caps":["11px",{"lineHeight":"16px","letterSpacing":"0.05em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"40px","letterSpacing":"-0.01em","fontWeight":"400"}],"label-ui":["12px",{"lineHeight":"16px","letterSpacing":"0.02em","fontWeight":"500"}],"clock-display":["72px",{"lineHeight":"80px","letterSpacing":"-0.02em","fontWeight":"300"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet"/></head><body class="bg-surface-container-low font-body-md text-on-surface antialiased"><header class="fixed top-0 w-full z-50 flex flex-col bg-surface-toolbar"><div class="h-10 flex items-center px-4 gap-4"><div class="flex gap-2 w-16"><div class="w-3 h-3 rounded-full bg-[#FF5F57]"></div><div class="w-3 h-3 rounded-full bg-[#FEB22E]"></div><div class="w-3 h-3 rounded-full bg-[#28C840]"></div></div><nav class="flex items-end h-full gap-1 overflow-hidden" data-active-classes="bg-surface-container-highest text-on-surface"><a class="h-8 px-4 flex items-center gap-2 rounded-t-lg bg-surface-container-highest text-label-ui text-on-surface border-x border-t border-border-subtle" data-path="new-tab" href="#">New Tab</a><a class="h-8 px-4 flex items-center gap-2 rounded-t-lg text-label-ui text-on-surface-variant hover:bg-surface-container-high transition-colors" data-path="history" href="#">History</a><a aria-current="page" class="h-8 px-4 flex items-center gap-2 rounded-t-lg transition-colors bg-surface-container-highest text-on-surface" data-path="downloads" href="#">Downloads</a></nav><div class="flex-1"></div><button class="p-1 text-on-surface-variant hover:text-on-surface"><span class="material-symbols-outlined text-[18px]">add</span></button></div><div class="h-toolbar-height flex items-center px-4 gap-4 border-t border-border-subtle bg-surface-toolbar"><div class="flex items-center gap-2"><button class="p-1.5 rounded-full hover:bg-surface-container-high text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">arrow_back</span></button><button class="p-1.5 rounded-full hover:bg-surface-container-high text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">arrow_forward</span></button><button class="p-1.5 rounded-full hover:bg-surface-container-high text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">refresh</span></button></div><div class="flex-1 flex justify-center"><div class="flex items-center w-full max-w-address-bar-width h-8 px-4 rounded-full bg-surface-address border border-border-subtle hover:border-white/20 transition-all cursor-text"><span class="material-symbols-outlined text-[16px] text-on-secondary-container mr-2">lock</span><span class="text-body-md text-on-surface truncate">Search or enter website name</span></div></div><div class="flex items-center gap-1"><button class="p-1.5 rounded-full hover:bg-surface-container-high text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">star</span></button><button class="p-1.5 rounded-full hover:bg-surface-container-high text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">download</span></button><button class="p-1.5 rounded-full hover:bg-surface-container-high text-on-surface-variant"><span class="material-symbols-outlined text-[20px]">shield</span></button><div class="mx-2 w-[1px] h-4 bg-border-subtle"></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div><button class="p-1.5 rounded-full hover:bg-surface-container-high text-on-surface-variant ml-1"><span class="material-symbols-outlined text-[20px]">more_vert</span></button></div></div></header><main class="w-full pt-[88px] min-h-screen bg-surface-container-low"><div class="flex flex-col w-full h-full p-container-margin gap-8 max-w-[1024px] mx-auto">
+<!-- Header Area -->
+<div class="flex flex-row items-end justify-between w-full border-b border-border-subtle pb-4">
+<div class="flex flex-col gap-2">
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Downloads</h1>
+<p class="font-body-md text-body-md text-on-surface-variant">View and manage your downloaded files.</p>
+</div>
+<!-- Search -->
+<div class="relative flex items-center w-64 h-10 px-4 rounded-full bg-surface-container-high border border-border-subtle group hover:border-outline-variant transition-colors">
+<span class="material-symbols-outlined text-[20px] text-on-surface-variant mr-2">search</span>
+<input class="w-full bg-transparent border-none outline-none font-body-md text-body-md text-on-surface placeholder:text-on-surface-variant focus:ring-0" placeholder="Search downloads" type="text"/>
+</div>
+</div>
+<!-- Actions Bar -->
+<div class="flex flex-row justify-between items-center w-full">
+<div class="flex gap-4 items-center font-label-ui text-label-ui text-on-surface-variant uppercase tracking-wider">
+<span>Today</span>
+</div>
+<div class="flex gap-2">
+<button class="px-4 py-2 rounded-md bg-transparent hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-ui text-label-ui transition-colors">Clear all</button>
+<button class="px-4 py-2 rounded-md bg-transparent hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface font-label-ui text-label-ui transition-colors flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">folder_open</span>
+                 Open folder
+            </button>
+</div>
+</div>
+<!-- Downloads List -->
+<div class="flex flex-col w-full gap-2">
+<!-- Item 1: Complete PDF -->
+<div class="group relative flex flex-row items-center w-full p-4 rounded-lg bg-surface-container hover:bg-surface-container-highest border border-transparent hover:border-border-subtle transition-all duration-200 gap-6">
+<!-- Icon -->
+<div class="flex-shrink-0 w-12 h-12 rounded bg-error-container/20 flex items-center justify-center text-error">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">picture_as_pdf</span>
+</div>
+<!-- Details -->
+<div class="flex flex-col flex-grow min-w-0 justify-center">
+<div class="flex items-center gap-3">
+<span class="font-body-lg text-body-lg text-on-surface truncate">Q4_Financial_Report_Final_v2.pdf</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high border border-border-subtle font-label-caps text-label-caps text-on-surface-variant">PDF</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-body-md text-body-md text-on-surface-variant">https://finance.corp.internal/reports/q4/</span>
+<span class="w-1 h-1 rounded-full bg-border-subtle"></span>
+<span class="font-body-md text-body-md text-on-surface-variant">4.2 MB</span>
+</div>
+</div>
+<!-- Status / Actions -->
+<div class="flex-shrink-0 flex items-center gap-4">
+<div class="font-label-ui text-label-ui text-primary-fixed group-hover:hidden transition-opacity">Complete</div>
+<div class="hidden group-hover:flex items-center gap-2 transition-opacity">
+<button class="p-2 rounded hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Show in folder">
+<span class="material-symbols-outlined text-[20px]">folder</span>
+</button>
+<button class="p-2 rounded hover:bg-error-container hover:text-on-error-container text-on-surface-variant transition-colors" title="Remove from list">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 2: Downloading ZIP -->
+<div class="group relative flex flex-row items-center w-full p-4 rounded-lg bg-surface-container hover:bg-surface-container-highest border border-transparent hover:border-border-subtle transition-all duration-200 gap-6">
+<!-- Icon -->
+<div class="flex-shrink-0 w-12 h-12 rounded bg-accent-blue/10 flex items-center justify-center text-accent-blue relative overflow-hidden">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">folder_zip</span>
+<!-- Progress overlay for icon -->
+<div class="absolute bottom-0 left-0 w-full h-[45%] bg-accent-blue/20"></div>
+</div>
+<!-- Details -->
+<div class="flex flex-col flex-grow min-w-0 justify-center">
+<div class="flex items-center gap-3">
+<span class="font-body-lg text-body-lg text-on-surface truncate">Design_System_Assets_2024.zip</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high border border-border-subtle font-label-caps text-label-caps text-on-surface-variant">ZIP</span>
+</div>
+<div class="flex flex-col w-full max-w-[400px] mt-2 gap-1.5">
+<div class="w-full h-1 bg-surface-container-highest rounded-full overflow-hidden">
+<div class="h-full bg-accent-blue rounded-full" style="width: 45%;"></div>
+</div>
+<div class="flex justify-between items-center w-full">
+<span class="font-label-ui text-label-ui text-on-surface-variant">450 MB / 1.0 GB</span>
+<span class="font-label-ui text-label-ui text-accent-blue">2 mins left</span>
+</div>
+</div>
+</div>
+<!-- Status / Actions -->
+<div class="flex-shrink-0 flex items-center gap-4">
+<div class="hidden group-hover:flex items-center gap-2 transition-opacity">
+<button class="p-2 rounded hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Pause">
+<span class="material-symbols-outlined text-[20px]">pause</span>
+</button>
+<button class="p-2 rounded hover:bg-error-container hover:text-on-error-container text-on-surface-variant transition-colors" title="Cancel">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Item 3: Failed Image -->
+<div class="group relative flex flex-row items-center w-full p-4 rounded-lg bg-surface-container hover:bg-surface-container-highest border border-transparent hover:border-border-subtle transition-all duration-200 gap-6 opacity-75">
+<!-- Icon -->
+<div class="flex-shrink-0 w-12 h-12 rounded bg-surface-variant flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">image</span>
+</div>
+<!-- Details -->
+<div class="flex flex-col flex-grow min-w-0 justify-center">
+<div class="flex items-center gap-3">
+<span class="font-body-lg text-body-lg text-on-surface line-through truncate">hero_banner_dark_mode_final.png</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-body-md text-body-md text-error">Failed - Network error</span>
+</div>
+</div>
+<!-- Status / Actions -->
+<div class="flex-shrink-0 flex items-center gap-4">
+<div class="font-label-ui text-label-ui text-error group-hover:hidden transition-opacity flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]">error</span> Failed
+                </div>
+<div class="hidden group-hover:flex items-center gap-2 transition-opacity">
+<button class="p-2 rounded hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Retry">
+<span class="material-symbols-outlined text-[20px]">refresh</span>
+</button>
+<button class="p-2 rounded hover:bg-error-container hover:text-on-error-container text-on-surface-variant transition-colors" title="Remove from list">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Yesterday Section Header -->
+<div class="flex flex-row justify-between items-center w-full mt-6">
+<div class="flex gap-4 items-center font-label-ui text-label-ui text-on-surface-variant uppercase tracking-wider">
+<span>Yesterday</span>
+</div>
+</div>
+<!-- Downloads List (Yesterday) -->
+<div class="flex flex-col w-full gap-2">
+<!-- Item 4: DMG -->
+<div class="group relative flex flex-row items-center w-full p-4 rounded-lg bg-surface-container hover:bg-surface-container-highest border border-transparent hover:border-border-subtle transition-all duration-200 gap-6">
+<!-- Icon -->
+<div class="flex-shrink-0 w-12 h-12 rounded bg-surface-variant flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">desktop_mac</span>
+</div>
+<!-- Details -->
+<div class="flex flex-col flex-grow min-w-0 justify-center">
+<div class="flex items-center gap-3">
+<span class="font-body-lg text-body-lg text-on-surface truncate">Figma-arm64.dmg</span>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-high border border-border-subtle font-label-caps text-label-caps text-on-surface-variant">DMG</span>
+</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-body-md text-body-md text-on-surface-variant">https://desktop.figma.com/mac-arm/</span>
+<span class="w-1 h-1 rounded-full bg-border-subtle"></span>
+<span class="font-body-md text-body-md text-on-surface-variant">284 MB</span>
+</div>
+</div>
+<!-- Status / Actions -->
+<div class="flex-shrink-0 flex items-center gap-4">
+<div class="font-label-ui text-label-ui text-on-surface-variant group-hover:hidden transition-opacity">Complete</div>
+<div class="hidden group-hover:flex items-center gap-2 transition-opacity">
+<button class="p-2 rounded hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Show in folder">
+<span class="material-symbols-outlined text-[20px]">folder</span>
+</button>
+<button class="p-2 rounded hover:bg-error-container hover:text-on-error-container text-on-surface-variant transition-colors" title="Remove from list">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div></main><footer class="fixed bottom-0 w-full h-8 flex items-center px-4 bg-surface-toolbar border-t border-border-subtle text-label-caps text-on-secondary-container"><span>Industrial Minimalist Browser v1.0.4</span></footer>
+
+        <!-- Settings Overlay -->
+        <div id="settingsOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.8); align-items:center; justify-content:center; z-index:9999;">
+            <div style="background:#2E3441; padding:30px; border-radius:10px; width:400px; text-align:left; border:1px solid #1edbcb;">
+                <h2 style="margin-bottom:20px; color:white;">Settings / Настройки</h2>
+                <div style="margin-bottom:15px; color:white;">
+                    <label>Language:</label>
+                    <select id="langSelect" style="float:right; padding:5px; background:#252934; color:white; border:1px solid #6C7789;">
+                        <option value="en">English</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                </div>
+                <div style="margin-bottom:15px; color:white;">
+                    <label>Hardware Acceleration:</label>
+                    <input type="checkbox" id="hwAccelCheck" checked style="float:right;">
+                </div>
+                <div style="margin-bottom:15px; color:white;">
+                    <label>Restore Tabs on Startup:</label>
+                    <input type="checkbox" id="restoreTabsCheck" checked style="float:right;">
+                </div>
+                <div style="display:flex; justify-content:space-between; margin-top:30px;">
+                    <button onclick="saveSettings()" style="padding:10px 20px; background:#1edbcb; border:none; border-radius:5px; cursor:pointer;">Save</button>
+                    <button onclick="closeSettings()" style="padding:10px 20px; background:#dc0808; border:none; border-radius:5px; color:white; cursor:pointer;">Close</button>
+                </div>
+            </div>
+        </div>
+
+    <script>
+        // Restored Tab and Navigation Logic
+        let currentActiveTabId = -1;
+
+        window.onload = function() {
+            setTimeout(() => {
+                if(window.cefQuery) {
+                    createNewTab();
+                } else {
+                    console.error('Warning: cefQuery not found. Not in Sandbox?');
+                }
+            }, 500);
+        };
+
+        function createNewTab() {
+            if (!window.cefQuery) return;
+            window.cefQuery({
+                request: 'Tab_New',
+                onSuccess: function(tabIdStr) {
+                    const newTabId = parseInt(tabIdStr);
+                    addTabUI(newTabId);
+                },
+                onFailure: function(code, msg) {}
+            });
+        }
+
+        function switchTab(tabId) {
+            if (!window.cefQuery) return;
+            window.cefQuery({
+                request: 'Tab_Switch_' + tabId,
+                onSuccess: function() { updateActiveTabUI(tabId); },
+                onFailure: function(code, msg) {}
+            });
+        }
+
+        function closeTab(event, tabId) {
+            event.stopPropagation();
+            if (!window.cefQuery) return;
+            window.cefQuery({
+                request: 'Tab_Close_' + tabId,
+                onSuccess: function() { removeTabUI(tabId); },
+                onFailure: function(code, msg) {}
+            });
+        }
+
+        function addTabUI(tabId) {
+            const container = document.getElementById('tabContainer');
+            if(!container) return;
+            const newBtn = document.getElementById('newTabBtn');
+            const tabDiv = document.createElement('div');
+            tabDiv.className = 'tabItem flex items-center justify-between min-w-[160px] max-w-[240px] px-3 h-full cursor-pointer hover:bg-white/5 border border-border-subtle rounded-t-xl mx-1';
+            tabDiv.setAttribute('data-tab-id', tabId);
+            tabDiv.onclick = () => switchTab(tabId);
+
+            tabDiv.innerHTML = `
+                <span class="text-label-ui text-on-surface truncate pr-2">New Tab</span>
+                <button class="text-on-surface-variant hover:text-on-surface w-4 h-4 flex items-center justify-center rounded-full hover:bg-white/10" onclick="closeTab(event, ${tabId})">
+                  <i class="fas fa-times text-[10px]"></i>
+                </button>
+            `;
+            container.insertBefore(tabDiv, newBtn);
+            updateActiveTabUI(tabId);
+        }
+
+        function updateActiveTabUI(activeId) {
+            currentActiveTabId = activeId;
+            document.querySelectorAll('.tabItem').forEach(tab => {
+                if (parseInt(tab.getAttribute('data-tab-id')) === activeId) {
+                    tab.classList.add('bg-surface-toolbar');
+                    tab.classList.remove('bg-surface-container-low');
+                } else {
+                    tab.classList.add('bg-surface-container-low');
+                    tab.classList.remove('bg-surface-toolbar');
+                }
+            });
+        }
+
+        function removeTabUI(tabId) {
+            const tab = document.querySelector(`.tabItem[data-tab-id="${tabId}"]`);
+            if (tab) tab.remove();
+        }
+
+        function navBack() { if(window.cefQuery) window.cefQuery({ request: 'Nav_Back', onSuccess:()=>{}, onFailure:()=>{} }); }
+        function navForward() { if(window.cefQuery) window.cefQuery({ request: 'Nav_Forward', onSuccess:()=>{}, onFailure:()=>{} }); }
+        function navReload() { if(window.cefQuery) window.cefQuery({ request: 'Nav_Reload', onSuccess:()=>{}, onFailure:()=>{} }); }
+
+        // Settings Modal Handlers
+        function openSettings() {
+            document.getElementById('settingsOverlay').style.display = 'flex';
+        }
+        function closeSettings() {
+            document.getElementById('settingsOverlay').style.display = 'none';
+        }
+        function saveSettings() {
+            const lang = document.getElementById('langSelect').value;
+            const hw = document.getElementById('hwAccelCheck').checked;
+            const rt = document.getElementById('restoreTabsCheck').checked;
+
+            if(window.cefQuery) {
+                window.cefQuery({
+                    request: `Settings_Save_${lang}_${hw}_${rt}`,
+                    onSuccess: function() { closeSettings(); },
+                    onFailure: function() {}
+                });
+            }
+        }
+
+        // Attach Nav events
+        const navInput = document.getElementById('omniboxInput');
+        if(navInput) {
+            navInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    const input = navInput.value.trim();
+                    if(!input || !window.cefQuery) return;
+
+                    window.cefQuery({
+                        request: 'Nav_Load_URL_' + input,
+                        onSuccess: function() { console.log('Navigation success'); },
+                        onFailure: function(c, msg) { console.error('Navigation failed: ' + msg); }
+                    });
+                }
+            });
+        }
+    </script>
+</body></html>
