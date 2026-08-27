@@ -32,6 +32,7 @@ public:
 
     // CefClient methods:
     CefRefPtr<CefLifeSpanHandler> GetLifeSpanHandler() override { return this; }
+    CefRefPtr<CefDownloadHandler> GetDownloadHandler() override;
 
     // IPC
     bool OnProcessMessageReceived(CefRefPtr<CefBrowser> browser,
@@ -52,6 +53,9 @@ private:
 
     // Pointer to Tab Manager
     class TabManager* tab_manager_;
+
+    // Download Manager
+    CefRefPtr<CefDownloadHandler> download_handler_;
 
     // IPC Message Router
     CefRefPtr<CefMessageRouterBrowserSide> message_router_;

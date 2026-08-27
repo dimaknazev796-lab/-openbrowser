@@ -35,3 +35,7 @@ if(WIN32)
 endif()
 
 add_subdirectory(src)
+
+# Enable testing
+enable_testing()
+add_subdirectory(tests/security)

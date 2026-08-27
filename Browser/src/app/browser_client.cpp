@@ -1,6 +1,7 @@
 #include "browser_client.h"
 #include "../tabs/tab_manager.h"
 #include "../navigation/navigation_handler.h"
+#include "../downloads/download_handler.h"
 #include <iostream>
 
 #ifdef HAS_CEF
@@ -131,6 +132,13 @@ SecureBrowserClient::SecureBrowserClient() : tab_manager_(new TabManager()) {
     message_router_ = CefMessageRouterBrowserSide::Create(config);
     message_handler_ = new SecureMessageRouterHandler();
     message_router_->AddHandler(message_handler_.get(), false);
+
+    // Initialize Secure Download Handler
+    download_handler_ = new SecureDownloadHandler();
+}
+
+CefRefPtr<CefDownloadHandler> SecureBrowserClient::GetDownloadHandler() {
+    return download_handler_;
 }
 
 SecureBrowserClient::~SecureBrowserClient() {

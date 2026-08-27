@@ -2,8 +2,10 @@
 #include <iostream>
 #include <regex>
 
+// Compile implementation regardless of HAS_CEF for testing
 #ifdef HAS_CEF
 #include "include/wrapper/cef_helpers.h"
+#endif
 
 // Strict security checks for navigation
 bool NavigationHandler::IsSecureUrl(const std::string& url) {
@@ -35,10 +37,13 @@ std::string NavigationHandler::ParseOmniboxInput(const std::string& input) {
     // Basic heuristic: if it has no spaces and contains a dot, assume URL.
     // Also ensuring it doesn't accidentally have a dangerous scheme prefix that was typed without //
     if (input.find(" ") == std::string::npos && input.find(".") != std::string::npos) {
-        if (input.find("javascript:") == 0 || input.find("file:") == 0 || input.find("data:") == 0) {
-            return input; // Let IsSecureUrl catch it
-        }
         return "https://" + input; // Force HTTPS by default (Security First)
+    }
+
+    // Explicitly fallback on letting dangerous schemes pass through if they were fully typed without a space
+    // so IsSecureUrl can properly block them later rather than searching google for "javascript:alert(1)".
+    if (input.find("javascript:") == 0 || input.find("file:") == 0 || input.find("data:") == 0) {
+        return input;
     }
 
     // Otherwise, treat as a search query.
@@ -52,6 +57,7 @@ std::string NavigationHandler::ParseOmniboxInput(const std::string& input) {
     return "https://www.google.com/search?q=" + encoded_query;
 }
 
+#ifdef HAS_CEF
 void NavigationHandler::LoadUrl(CefRefPtr<CefBrowser> browser, const std::string& url) {
     CEF_REQUIRE_UI_THREAD();
     if (browser && browser->GetMainFrame()) {
@@ -88,4 +94,4 @@ void NavigationHandler::Reload(CefRefPtr<CefBrowser> browser, bool ignore_cache)
         }
     }
 }
-#endif
+#endif // HAS_CEF

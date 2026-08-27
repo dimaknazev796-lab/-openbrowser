@@ -21,8 +21,8 @@ public:
 // Mock class
 class NavigationHandler {
 public:
-    static bool IsSecureUrl(const std::string& url) { return true; }
-    static std::string ParseOmniboxInput(const std::string& input) { return input; }
+    static bool IsSecureUrl(const std::string& url);
+    static std::string ParseOmniboxInput(const std::string& input);
 };
 #endif
 
