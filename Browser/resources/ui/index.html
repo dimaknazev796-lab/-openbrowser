@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SecureBrowser</title>
+    <style>
+        :root {
+            --bg-color: #f1f3f4;
+            --toolbar-bg: #ffffff;
+            --border-color: #dadce0;
+            --text-color: #202124;
+            --tab-active: #ffffff;
+            --tab-inactive: #e8eaed;
+            --hover-color: #f1f3f4;
+            --icon-color: #5f6368;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--bg-color);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Titlebar & Tabs */
+        .titlebar {
+            display: flex;
+            background-color: var(--tab-inactive);
+            height: 40px;
+            padding-top: 8px;
+            align-items: flex-end;
+            padding-left: 8px;
+        }
+
+        .tab {
+            background-color: var(--tab-inactive);
+            border-radius: 8px 8px 0 0;
+            padding: 8px 16px;
+            margin-right: 4px;
+            font-size: 12px;
+            color: var(--text-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            min-width: 150px;
+            max-width: 240px;
+            position: relative;
+        }
+
+        .tab.active {
+            background-color: var(--tab-active);
+            box-shadow: 0 -1px 2px rgba(0,0,0,0.1);
+        }
+
+        .tab:not(.active):hover {
+            background-color: var(--hover-color);
+        }
+
+        .close-btn {
+            margin-left: auto;
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .close-btn:hover {
+            background-color: #d1d3d4;
+        }
+
+        .new-tab-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 6px;
+            margin-left: 4px;
+            cursor: pointer;
+            color: var(--text-color);
+            font-size: 18px;
+        }
+
+        .new-tab-btn:hover {
+            background-color: var(--hover-color);
+        }
+
+        /* Toolbar */
+        .toolbar {
+            background-color: var(--toolbar-bg);
+            height: 44px;
+            display: flex;
+            align-items: center;
+            padding: 0 8px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .btn {
+            background: none;
+            border: none;
+            border-radius: 50%;
+            width: 32px;
+            height: 32px;
+            margin: 0 2px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--icon-color);
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background-color: var(--hover-color);
+        }
+
+        .omnibox {
+            flex-grow: 1;
+            background-color: var(--bg-color);
+            border: 1px solid transparent;
+            border-radius: 20px;
+            height: 32px;
+            padding: 0 16px;
+            margin: 0 8px;
+            font-size: 14px;
+            color: var(--text-color);
+            outline: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .omnibox:focus-within {
+            background-color: #fff;
+            border-color: #4285f4;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .omnibox input {
+            border: none;
+            background: transparent;
+            width: 100%;
+            outline: none;
+            font-size: 14px;
+        }
+
+        /* Content Area */
+        .content {
+            flex-grow: 1;
+            background-color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        #status {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 4px;
+            background: #e8f0fe;
+            color: #1967d2;
+            font-size: 14px;
+            display: none;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="titlebar" id="tabContainer">
+        <div class="new-tab-btn" onclick="createNewTab()">+</div>
+    </div>
+
+    <div class="toolbar">
+        <button class="btn" title="Back" onclick="navBack()">◄</button>
+        <button class="btn" title="Forward" onclick="navForward()">►</button>
+        <button class="btn" title="Reload" onclick="navReload()">↻</button>
+
+        <div class="omnibox">
+            <span style="margin-right: 8px; color: #5f6368;">🔒</span>
+            <input type="text" placeholder="Search Google or type a URL" id="urlInput">
+        </div>
+
+        <button class="btn" title="Settings">⋮</button>
+    </div>
+
+    <div class="content">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Chromium_Logo.svg" width="100" alt="Chromium">
+        <h2>SecureBrowser Stage 3</h2>
+        <p>Tab Management & Browser Views</p>
+        <div id="status"></div>
+    </div>
+
+    <script>
+        let currentActiveTabId = -1;
+
+        // Auto-create the initial startup tab once UI connects to C++
+        window.onload = function() {
+            setTimeout(() => {
+                if(window.cefQuery) {
+                    createNewTab();
+                } else {
+                    logStatus('Warning: cefQuery not found on load. Not in Sandbox?', true);
+                }
+            }, 500); // slight delay to ensure IPC is ready
+        };
+
+        function logStatus(msg, isError = false) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.style.display = 'block';
+            statusDiv.style.background = isError ? '#fce8e6' : '#e6f4ea';
+            statusDiv.style.color = isError ? '#c5221f' : '#137333';
+            statusDiv.textContent = msg;
+        }
+
+        function createNewTab() {
+            if (!window.cefQuery) {
+                logStatus('cefQuery not available. Running outside sandbox?', true);
+                return;
+            }
+
+            window.cefQuery({
+                request: 'Tab_New',
+                onSuccess: function(tabIdStr) {
+                    const newTabId = parseInt(tabIdStr);
+                    addTabUI(newTabId);
+                    logStatus('C++ created native tab ID: ' + newTabId);
+                },
+                onFailure: function(code, msg) {
+                    logStatus('Failed to create tab: ' + msg, true);
+                }
+            });
+        }
+
+        function switchTab(tabId) {
+            if (!window.cefQuery) return;
+
+            window.cefQuery({
+                request: 'Tab_Switch_' + tabId,
+                onSuccess: function() {
+                    updateActiveTabUI(tabId);
+                    logStatus('Switched to tab ID: ' + tabId);
+                },
+                onFailure: function(code, msg) {
+                    logStatus('Failed to switch tab: ' + msg, true);
+                }
+            });
+        }
+
+        function closeTab(event, tabId) {
+            event.stopPropagation(); // Prevent switchTab from firing
+            if (!window.cefQuery) return;
+
+            window.cefQuery({
+                request: 'Tab_Close_' + tabId,
+                onSuccess: function() {
+                    removeTabUI(tabId);
+                    logStatus('Closed tab ID: ' + tabId);
+                },
+                onFailure: function(code, msg) {
+                    logStatus('Failed to close tab: ' + msg, true);
+                }
+            });
+        }
+
+        function addTabUI(tabId) {
+            const container = document.getElementById('tabContainer');
+            const newBtn = document.querySelector('.new-tab-btn');
+
+            const tabDiv = document.createElement('div');
+            tabDiv.className = 'tab';
+            tabDiv.setAttribute('data-tab-id', tabId);
+            tabDiv.onclick = () => switchTab(tabId);
+
+            tabDiv.innerHTML = `
+                <span>New Tab</span>
+                <span class="close-btn" onclick="closeTab(event, ${tabId})">×</span>
+            `;
+
+            container.insertBefore(tabDiv, newBtn);
+            updateActiveTabUI(tabId);
+        }
+
+        function updateActiveTabUI(activeId) {
+            currentActiveTabId = activeId;
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                if (parseInt(tab.getAttribute('data-tab-id')) === activeId) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+        }
+
+        function removeTabUI(tabId) {
+            const tab = document.querySelector(`.tab[data-tab-id="${tabId}"]`);
+            if (tab) {
+                tab.remove();
+            }
+            // Fallback logic for active tab selection could go here
+        }
+
+        // Navigation Handlers
+        document.getElementById('urlInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                const url = this.value.trim();
+                if (!url) return;
+                if (!window.cefQuery) return;
+
+                window.cefQuery({
+                    request: 'Nav_Load_URL_' + url,
+                    onSuccess: function() { logStatus('Loading: ' + url); },
+                    onFailure: function(c, msg) { logStatus('Load failed: ' + msg, true); }
+                });
+            }
+        });
+
+        function navBack() {
+            if(window.cefQuery) window.cefQuery({ request: 'Nav_Back', onSuccess:()=>{}, onFailure:()=>{} });
+        }
+
+        function navForward() {
+            if(window.cefQuery) window.cefQuery({ request: 'Nav_Forward', onSuccess:()=>{}, onFailure:()=>{} });
+        }
+
+        function navReload() {
+            if(window.cefQuery) window.cefQuery({ request: 'Nav_Reload', onSuccess:()=>{}, onFailure:()=>{} });
+        }
+    </script>
+</body>
+</html>
